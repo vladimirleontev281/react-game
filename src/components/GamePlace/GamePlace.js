@@ -4,14 +4,15 @@ import Game from './Game';
 import slyles from './GamePlace.module.css';
 
 
-const GamePlace = () => {
+const GamePlace = props => {
+  console.log(props);
   return (
     <div className={slyles.GamePlace}>
       <div className={slyles.scoreBlock}>
-        <Score />
+        <Score {...props} />
       </div>
       <div className={slyles.gameBlock}>
-        <Game />
+        <Game {...props} />
       </div>
     </div>
   );

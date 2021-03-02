@@ -1,7 +1,7 @@
 .GamePlace{
   width: 100%;
   min-height: calc(100vh - 180px);
-  padding: 20px 50px;
+  padding: 50px 50px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
@@ -35,6 +35,7 @@
   font-size: 30px;
 }
 .Player{
+  position: relative;
   width: 100%;
   height: 100px;
   display: flex;
@@ -49,6 +50,34 @@
   margin-right: 30px;
   text-decoration: underline;
 }
+.PlayerModal{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.PlayerModal>div{
+  width: 80%;
+}
+.playerNameModalDescrip{
+  display: block;
+  font-size: 10px;
+  font-style: italic;
+  color: white;
+}
+.playerNameModalInput{
+  width: 100%;
+  height: 30px;
+  padding: 3px 8px;
+  border-radius: 5px;
+}
 .gameBlock{
   width: 60%;
   padding-left: 50px;
@@ -58,8 +87,44 @@
   align-items: center;
 }
 .Game{
+  list-style-type: none;
   position: relative;
   width: 30vw;
   height: 30vw;
-  background-color: violet;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.Cell{
+  padding: 10%;
+  /* border: 1px solid black; */
+  cursor: pointer;
+}
+.verticalLeft, .verticalRight, .horizontTop, .horizontBottom{
+  position: absolute;
+  border: 1px solid white;
+}
+.verticalLeft, .verticalRight{
+  width: 0;
+  height: calc(100% + 40px);
+  top: -20px;
+}
+.horizontTop, .horizontBottom{
+  width: calc(100% + 40px);
+  height: 0;
+  left: -20px;
+}
+.verticalLeft{
+  left: calc(33.33% - 1px);
+}
+.verticalRight{
+  right: calc(33.33% - 1px);
+}
+.horizontTop{
+  top: calc(33.33% - 1px);
+}
+.horizontBottom{
+  bottom: calc(33.33% - 1px);
 }
