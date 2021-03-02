@@ -5,28 +5,32 @@ import PlayerModal from './PlayerModal';
 import slyles from './GamePlace.module.css';
 
 const Player = props => {
-  const {player, players, score, dispatch } = props;
+  const {player, players, score, gameSession, dispatch } = props;
   const [playerName, setPlayerName] = useState(getPlayerName(players, player));
   const [isEditMode, setIsEditMode] = useState(false);
   const playerScore = getPlayerScore(score, player);
 
   const playerRef = useRef(null);
   const inputRef = useRef(null);
+
+  const clickHandler = () => {
+    if (!gameSession) setIsEditMode(true);
+  };
   
-  const onBlurHandler = e => {
+  const blurHandler = e => {
     if (!playerRef.current.contains(e.target)) {
       setIsEditMode(false);
     };
   };
-  
+
   const toggleListeners = isActivate => {
     if (isActivate) {
-      document.addEventListener('click', onBlurHandler);
+      document.addEventListener('click', blurHandler);
       document.addEventListener('keydown', e => {
         if (e.key === 'Enter') setIsEditMode(false);
       });
     } else {
-      document.removeEventListener('click', onBlurHandler);
+      document.removeEventListener('click', blurHandler);
       document.addEventListener('keydown', e => {
         if (e.key === 'Enter') setIsEditMode(false);
       });
@@ -43,12 +47,14 @@ const Player = props => {
     return () => {toggleListeners(false);}
   }, [isEditMode]);
 
-  // console.log(players);
   return (
-    <div className={slyles.Player} ref={playerRef} onClick={() => setIsEditMode(true)} >
+    <div  className={`${slyles.Player} ${gameSession ? slyles.gameSession : ''}`} 
+          ref={playerRef} 
+          onClick={clickHandler} 
+    >
     { isEditMode
       ? <PlayerModal  value={playerName} 
-                      onChangeHandler={e => setPlayerName(e.target.value)} 
+                      changeHandler={e => setPlayerName(e.target.value)} 
                       inputRef={inputRef}
         />
       : <>

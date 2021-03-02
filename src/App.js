@@ -13,7 +13,11 @@ const App = () => {
   return (
     <div className={slyles.App}>
       <Header {...props} />
-      <GamePlace players={state.players} score={state.score} dispatch={dispatch} />
+      <GamePlace  players={state.players} 
+                  score={state.score} 
+                  dispatch={dispatch} 
+                  gameSession={state.gameSession}
+      />
       <Footer />
     </div>
   );

@@ -5,7 +5,6 @@ import slyles from './GamePlace.module.css';
 
 
 const GamePlace = props => {
-  console.log(props);
   return (
     <div className={slyles.GamePlace}>
       <div className={slyles.scoreBlock}>

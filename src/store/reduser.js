@@ -1,6 +1,7 @@
 export const initialState = {
   players: ['player A', 'player B'],
-  score: [0, 0]
+  score: [0, 0],
+  gameSession: false,
 };
 
 export const actionsTypes = {
@@ -15,10 +16,8 @@ const reduser = (state, action) => {
   let newValues;
   switch (action.type) {
     case actionsTypes.setUserName:
-      console.log(action);
       newValues = [...state.players];
       newValues[action.data.player === 'playerA' ? 0 : 1] = action.data.name;
-      // console.log('newValues: ', newValues);
       return {...state, players: [...newValues]};
   
     default:
