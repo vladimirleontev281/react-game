@@ -3,10 +3,18 @@
   height: 80px;
   padding: 0 50px;
   background-color: black;
+  animation-delay: 1.2s;
+  --animate-duration: 0.3s;
+}
+.Footer>div{
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+  --animate-duration: 0.8s;
+  animation-delay: 2.4s;
 }
 .rsLogo{
   min-width: 110px;
