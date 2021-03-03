@@ -42,6 +42,10 @@
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: center;
+  cursor: pointer;
+}
+.gameSession{
+  cursor: auto;
 }
 .Player:first-of-type{
   margin-bottom: 20px;
@@ -50,10 +54,11 @@
   margin-right: 30px;
   text-decoration: underline;
 }
-.Player>span:nth-of-type(3){
+.playerMessage{
   position: absolute;
   right: 0;
-  top: 30%;
+  top: 75%;
+  font-size: 60%;
 }
 .PlayerModal{
   position: absolute;

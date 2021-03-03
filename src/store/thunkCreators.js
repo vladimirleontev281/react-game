@@ -32,9 +32,7 @@ const thunkCreators = {
         dispatch(actionCreators.setWinning(null));
         dispatch(actionCreators.toggleActiveIcon('cross'));
         dispatch(actionCreators.toggleActivePlayer(getRandomPlayer()));
-        dispatch(actionCreators.setWinning(null));
         dispatch(actionCreators.setGameMove(null));
-
         dispatch(actionCreators.setGameSession(false));
     },
     resetScore: (state, dispatch) => () => {
@@ -43,6 +41,7 @@ const thunkCreators = {
     },
     clearBase: (state, dispatch) => () => {
         api.clearBase();
+        dispatch(actionCreators.setScore([0, 0]));
     },
 
     // 111: (state, dispatch) => () => {

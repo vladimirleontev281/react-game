@@ -51,10 +51,6 @@ const Player = props => {
     setPlayerName(getPlayerName(players, player));
   }, [players]);
   
-  // useEffect(() => {
-  //   setPlayerName(getPlayerScore(score, player));
-  // }, [score]);
-
   return (
     <div  className={`${slyles.Player} ${gameSession ? slyles.gameSession : ''}`} 
           ref={playerRef} 
@@ -68,7 +64,7 @@ const Player = props => {
       : <>
           <span className={'unselectable'}>{playerName}</span>
           <span className={'unselectable'}>{playerScore}</span>
-          {active ? <span>your move!</span> : null}
+          {active ? <span className={`${slyles.playerMessage} unselectable`}>your move!</span> : null}
         </>
     }
     </div>

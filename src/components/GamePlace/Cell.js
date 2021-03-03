@@ -18,7 +18,7 @@ const Cell = ({index, blocked, gameSession, activeIcon, activePlayer, thunks}) =
 
     useEffect(() =>{
         previousGameSession.current = gameSession;
-    });
+    }, [gameSession]);
     return (
         <li className={`${slyles.Cell} ${classes} unselectable`}
             data-index={index}

@@ -10,14 +10,15 @@ import slyles from './App.module.css';
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   const thunks = Object.keys(thunkCreators).reduce((ac, key) => {
     ac[key] = thunkCreators[key](state, dispatch);
     return ac;
   }, {});
 
   const players = state.players;
+  const gameSession = state.gameSession;
   const previousPlayers = useRef(players);
+  const previousGameSession = useRef(gameSession);
 
   useEffect(() => {
     thunks.initGame();
@@ -27,11 +28,18 @@ const App = () => {
   useEffect(() => {
     if (winning) {
       thunks.addWinning(winning);
-      setTimeout(() => {
-        thunks.newGame();
-      }, 2000);
+      setTimeout(thunks.newGame, 2000);
     }
   }, [winning]);
+
+  useEffect(() => {
+    if (state.game.length !== 0 && !gameSession) {
+      dispatch(actionCreators.setGameSession(true));
+    }
+    if (state.game.length >= 9) {
+      setTimeout(thunks.newGame, 300);
+    }
+  }, [state.game]);
 
   useEffect(() => {
     if (players[0] !== previousPlayers.current[0] || players[1] !== previousPlayers.current[1]) {
@@ -39,6 +47,11 @@ const App = () => {
     }
     previousPlayers.current = players;
   }, [players]);
+
+  useEffect(() => {
+    if (!gameSession && previousGameSession.current) thunks.newGame();
+    previousGameSession.current = gameSession;
+  }, [gameSession]);
 
   useEffect(() => {
     console.log(state);

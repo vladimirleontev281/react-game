@@ -55,8 +55,7 @@ const reduser = (state, action) => {
     case actionsTypes.setGameMove:
       newValues = action.data ? [...state.game, action.data] : [];
       return {...state, 
-        game: [...newValues], 
-        gameSession: !(newValues.length >= 9)
+        game: [...newValues]
       };
 
     case actionsTypes.toggleActivePlayer:
