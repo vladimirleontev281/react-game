@@ -50,6 +50,11 @@
   margin-right: 30px;
   text-decoration: underline;
 }
+.Player>span:nth-of-type(3){
+  position: absolute;
+  right: 0;
+  top: 30%;
+}
 .PlayerModal{
   position: absolute;
   top: 0;
@@ -102,6 +107,43 @@
   /* border: 1px solid black; */
   cursor: pointer;
 }
+.Cell.cross, .Cell.zero {
+  position: relative;
+  cursor: none;
+  pointer-events: none;
+}
+.cross::before, .cross::after, .zero::before{
+  content: "";
+  display: block;
+  border: 1px solid white;
+  position: absolute;
+}
+.cross::before, .cross::after{
+  width: 80%;
+  height: 0;
+  top:50%;
+  left: 10%;
+}
+
+.cross::before{
+  transform: rotate(45deg);
+}
+.cross::after{
+  transform: rotate(-45deg);
+}
+.zero::before{
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+  border-radius: 50%;
+  border-width: 2px;
+}
+.Cell.blocked{
+  cursor: none;
+  pointer-events: none;
+}
+
 .verticalLeft, .verticalRight, .horizontTop, .horizontBottom{
   position: absolute;
   border: 1px solid white;
@@ -127,4 +169,71 @@
 }
 .horizontBottom{
   bottom: calc(33.33% - 1px);
+}
+.winningLine{
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+@keyframes winningLineHorizontal {
+  from {width: 0;}
+  to {width: 100%;}
+}
+@keyframes winningLineVertical {
+  from {height: 0;}
+  to {height: 100%;}
+}
+@keyframes winningLineDiagonal {
+  from {width: 0;}
+  to {width: 100%;}
+}
+
+
+.horizontal-1, .horizontal-2, .horizontal-3 {
+  left: 0;
+  border: 1px solid rgb(71, 168, 233);
+  animation: winningLineHorizontal 0.5s linear forwards;
+}
+.vertical-1, .vertical-2, .vertical-3{
+  top: 0;
+  border: 1px solid rgb(71, 168, 233);
+  animation: winningLineVertical 0.5s linear forwards;
+}
+.diagonal-left, .diagonal-right{
+  width: 140%;
+  height: 2px;
+  top: 50%;
+}
+.diagonal-left::before, .diagonal-right::after{
+  content: "";
+  display: block;
+  height: 0;
+  border: 1px solid rgb(71, 168, 233);
+  animation: winningLineDiagonal 0.5s linear forwards;
+}
+.horizontal-1{
+  top: 16.5%
+}
+.horizontal-2{
+  top: 49.8%;
+}
+.horizontal-3{
+  top: 83.1%;
+}
+.vertical-1{
+  left: 16.5%;
+}
+.vertical-2{
+  left: 49.8%;
+}
+.vertical-3{
+  left: 83.1%;
+}
+.diagonal-left{
+  left: -20%;
+  transform: rotate(45deg);
+}
+.diagonal-right{
+  right: -20%;
+  transform: rotate(-225deg);
 }

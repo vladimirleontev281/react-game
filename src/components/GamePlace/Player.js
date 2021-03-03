@@ -5,7 +5,7 @@ import PlayerModal from './PlayerModal';
 import slyles from './GamePlace.module.css';
 
 const Player = props => {
-  const {player, players, score, gameSession, dispatch } = props;
+  const {player, players, score, gameSession, dispatch, active } = props;
   const [playerName, setPlayerName] = useState(getPlayerName(players, player));
   const [isEditMode, setIsEditMode] = useState(false);
   const playerScore = getPlayerScore(score, player);
@@ -60,6 +60,7 @@ const Player = props => {
       : <>
           <span className={'unselectable'}>{playerName}</span>
           <span className={'unselectable'}>{playerScore}</span>
+          {active ? <span>your move!</span> : null}
         </>
     }
     </div>
