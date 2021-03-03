@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import reducer, { initialState, actionCreators } from "./store/reduser";
 import thunkCreators from "./store/thunkCreators";
 import { getWinning } from "./utils";
@@ -15,9 +15,15 @@ const App = () => {
     ac[key] = thunkCreators[key](state, dispatch);
     return ac;
   }, {});
-  
+
+  const players = state.players;
+  const previousPlayers = useRef(players);
+
+  useEffect(() => {
+    thunks.initGame();
+  }, []);
+
   const winning = getWinning(state.game);
-  
   useEffect(() => {
     if (winning) {
       thunks.addWinning(winning);
@@ -25,8 +31,14 @@ const App = () => {
         thunks.newGame();
       }, 2000);
     }
-
   }, [winning]);
+
+  useEffect(() => {
+    if (players[0] !== previousPlayers.current[0] || players[1] !== previousPlayers.current[1]) {
+      thunks.findAndSetResults(state.players[0], state.players[1]);
+    }
+    previousPlayers.current = players;
+  }, [players]);
 
   useEffect(() => {
     console.log(state);
@@ -34,7 +46,7 @@ const App = () => {
 
   return (
     <div className={slyles.App}>
-      <Header />
+      <Header dispatch={dispatch} thunks={thunks} />
       <GamePlace  players={state.players} 
                   score={state.score} 
                   activePlayer={state.activePlayer}

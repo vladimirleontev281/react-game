@@ -3,6 +3,7 @@ import { getPlayerName, getPlayerScore } from '../../utils';
 import { actionCreators } from '../../store/reduser';
 import PlayerModal from './PlayerModal';
 import slyles from './GamePlace.module.css';
+import thunkCreators from '../../store/thunkCreators';
 
 const Player = props => {
   const {player, players, score, gameSession, dispatch, active } = props;
@@ -41,11 +42,19 @@ const Player = props => {
       inputRef.current.select();
       toggleListeners(true);
     } else {
-      dispatch(actionCreators.setUserName(player, playerName));
+      dispatch(actionCreators.setPlayerName(player, playerName));
       toggleListeners(false);
     }
     return () => {toggleListeners(false);}
   }, [isEditMode]);
+
+  useEffect(() => {
+    setPlayerName(getPlayerName(players, player));
+  }, [players]);
+  
+  // useEffect(() => {
+  //   setPlayerName(getPlayerScore(score, player));
+  // }, [score]);
 
   return (
     <div  className={`${slyles.Player} ${gameSession ? slyles.gameSession : ''}`} 

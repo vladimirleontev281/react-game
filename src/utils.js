@@ -7,6 +7,14 @@ export const getRandomPlayer = () => {
     return random ? 'playerB' : 'playerA';
 };
 
+export const getNewScore = (oldScore, player) => {
+    return !player 
+        ? [0, 0]
+        :  player === 'playerA'
+            ? [oldScore[0] + 1, oldScore[1]]
+            : [oldScore[0], oldScore[1] + 1];
+};
+
 export const getWinning = game => {
     if (game.length < 5) return null;
     const winnings = {
