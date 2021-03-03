@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
 import { getPlayerName, getPlayerScore } from '../../utils';
 import { actionCreators } from '../../store/reduser';
