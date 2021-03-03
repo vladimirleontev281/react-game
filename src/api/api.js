@@ -11,13 +11,15 @@ const api = {
     },
     findResults: (playerA, playerB) => {
         const base = getBase();
-        if (base) return base.find(item => item.playerA === playerA && item.playerB === playerB)
+        if (base) return base.find(item => item.hasOwnProperty(playerA) && item.hasOwnProperty(playerB));
         return null;
     },
     saveResults: results => {
         const base = getBase() || [];
-        const newBase = base.filter(item => !(item.playerA === results.playerA && item.playerB === results.playerB));
-        setBase([...newBase, results]);
+        const newBase = base.filter(
+          item => !(item.hasOwnProperty(results.playerA) && item.hasOwnProperty(results.playerB))
+        );
+        setBase([...newBase, {[results.playerA]: results.score[0], [results.playerB]: results.score[1]}]);
     },
     clearBase: () => {
         setBase([]);

@@ -1,15 +1,20 @@
 import { actionCreators } from "./reduser";
-import { getRandomPlayer, getNewScore } from "../utils";
+import { getRandomPlayer, increaseScore } from "../utils";
 import api from "../api/api";
 
 const thunkCreators = {
     initGame: (state, dispatch) => () => {
         const lastGame = api.init();
-        if (lastGame) setGameResults(lastGame, dispatch);
+        if (lastGame) {
+          const players = Object.keys(lastGame);
+          delete players.score;
+          dispatch(actionCreators.setPlayers(players));
+          setGameResults(lastGame, players, dispatch)
+        };
     },
     findAndSetResults: (state, dispatch) => (playerA, playerB) => {
         const results = api.findResults(playerA, playerB);
-        if (results) setGameResults(results, dispatch) 
+        if (results) setGameResults(results, state.players, dispatch) 
         else dispatch(actionCreators.setScore([0, 0]));
     },
     makeGameMove: (state, dispatch) => data => {
@@ -18,7 +23,7 @@ const thunkCreators = {
         dispatch(actionCreators.toggleActiveIcon())
     },
     addWinning: (state, dispatch) => winning => {
-        const newScore = getNewScore(state.score, state.game[state.game.length - 1].player);
+        const newScore = increaseScore(state.score, state.game[state.game.length - 1].player);
         dispatch(actionCreators.setWinning(winning));
         dispatch(actionCreators.setScore(newScore));
         api.saveResults({playerA: state.players[0], playerB: state.players[1], score: newScore});
@@ -32,8 +37,9 @@ const thunkCreators = {
 
         dispatch(actionCreators.setGameSession(false));
     },
-    saveResults: (state, dispatch) => () => {
-        api.saveResults({playerA: state.players[0], playerB: state.players[1], score: state.score})
+    resetScore: (state, dispatch) => () => {
+      dispatch(actionCreators.setScore([0, 0]));
+      api.saveResults({playerA: state.players[0], playerB: state.players[1], score: [0, 0]})
     },
     clearBase: (state, dispatch) => () => {
         api.clearBase();
@@ -45,7 +51,6 @@ const thunkCreators = {
 };
 export default thunkCreators;
 
-function setGameResults(results, dispatch) {
-    dispatch(actionCreators.setPlayers([results.playerA, results.playerB]));
-    dispatch(actionCreators.setScore(results.score));
+function setGameResults(results, players, dispatch) {
+    dispatch(actionCreators.setScore([results[players[0]], results[players[1]]]));
 }

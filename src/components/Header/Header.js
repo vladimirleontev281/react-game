@@ -1,8 +1,9 @@
 import React from 'react';
-import { actionCreators } from "../../store/reduser";
+// import { actionCreators } from "../../store/reduser";
 import slyles from './Header.module.css';
 
-const Header = ({dispatch, thunks}) => {
+const Header = ({thunks}) => {
+
   return (
     <div className={slyles.Header}>
       <div className={slyles.logoBlock}>
@@ -11,7 +12,7 @@ const Header = ({dispatch, thunks}) => {
         <span className='unselectable'>Toe</span>
       </div>
       <ul className={slyles.menuBlock} >
-        <li className='unselectable' onClick={() => {dispatch(actionCreators.setScore([0, 0]))}}>Reset the score</li>
+        <li className='unselectable' onClick={() => {thunks.resetScore()}}>Reset the score</li>
         <li className='unselectable' onClick={() => {thunks.clearBase()}}>Clear all statistics</li>
       </ul>
     </div>

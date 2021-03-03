@@ -7,7 +7,7 @@ export const getRandomPlayer = () => {
     return random ? 'playerB' : 'playerA';
 };
 
-export const getNewScore = (oldScore, player) => {
+export const increaseScore = (oldScore, player) => {
     return !player 
         ? [0, 0]
         :  player === 'playerA'

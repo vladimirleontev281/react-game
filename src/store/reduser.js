@@ -1,7 +1,9 @@
 import { getRandomPlayer } from "../utils";
 
+const DEFAULT_PLAYERS_NAMES = ['player A', 'player B'];
+
 export const initialState = {
-  players: ['player A', 'player B'],
+  players: DEFAULT_PLAYERS_NAMES,
   score: [0, 0],
   gameSession: false,
   activePlayer: getRandomPlayer(),
@@ -33,7 +35,7 @@ export const actionCreators = {
 };
 
 const reduser = (state, action) => {
-  let newValues;
+  let newValues, index, reverseIndex;
   switch (action.type) {
     case actionsTypes.setGameSession: return {...state, gameSession: action.value};
     case actionsTypes.setPlayers: return {...state, players: action.value};
@@ -41,7 +43,13 @@ const reduser = (state, action) => {
 
     case actionsTypes.setPlayerName:
       newValues = [...state.players];
-      newValues[action.data.player === 'playerA' ? 0 : 1] = action.data.name;
+      index = action.data.player === 'playerA' ? 0 : 1;
+      reverseIndex = index ? 0 : 1;
+      newValues[index] = action.data.name !== state.players[reverseIndex] 
+        ? action.data.name
+        : action.data.name !== DEFAULT_PLAYERS_NAMES[0] 
+          ? DEFAULT_PLAYERS_NAMES[0] 
+          : DEFAULT_PLAYERS_NAMES[1];
       return {...state, players: [...newValues]};
 
     case actionsTypes.setGameMove:

@@ -3,7 +3,6 @@ import { getPlayerName, getPlayerScore } from '../../utils';
 import { actionCreators } from '../../store/reduser';
 import PlayerModal from './PlayerModal';
 import slyles from './GamePlace.module.css';
-import thunkCreators from '../../store/thunkCreators';
 
 const Player = props => {
   const {player, players, score, gameSession, dispatch, active } = props;
