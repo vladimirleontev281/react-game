@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useReducer, useRef } from 'react';
 import reducer, { initialState, actionCreators } from "./store/reduser";
 import thunkCreators from "./store/thunkCreators";
@@ -8,8 +9,10 @@ import GamePlace from "./components/GamePlace/GamePlace";
 import Footer from "./components/Footer/Footer";
 import slyles from './App.module.css';
 
+
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   const thunks = Object.keys(thunkCreators).reduce((ac, key) => {
     ac[key] = thunkCreators[key](state, dispatch);
     return ac;
