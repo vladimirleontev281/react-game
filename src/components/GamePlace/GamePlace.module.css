@@ -242,3 +242,75 @@
   right: -20%;
   transform: rotate(-225deg);
 }
+
+@media(max-width: 768px) {
+  .GamePlace{
+    padding: 30px 25px;
+  }
+  .scoreBlock{
+    padding-right: 25px;
+  }
+  .Score>h3{
+    font-size: 35px;
+  }
+  .Score>div{
+    font-size: 22px;
+  }
+  .gameBlock{
+    padding-left: 25px;
+  }
+  .Game{
+    width: 42vw;
+    height: 42vw;
+  }
+
+  .cross::before, .cross::after{
+    width: 80%;
+    height: 0;
+    top:50%;
+    left: 10%;
+  }
+  .cross::before{
+    transform: rotate(45deg);
+  }
+  .cross::after{
+    transform: rotate(-45deg);
+  }
+  .zero::before{
+    width: 60%;
+    height: 60%;
+    top: 20%;
+    left: 20%;
+    border-radius: 50%;
+    border-width: 2px;
+  }
+  .winningLine{
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+  @keyframes winningLineDiagonal {
+    from {width: 0;}
+    to {width: 100%;}
+  }
+  .diagonal-left, .diagonal-right{
+    width: 140%;
+    height: 2px;
+    top: 50%;
+  }
+  .diagonal-left::before, .diagonal-right::after{
+    content: "";
+    display: block;
+    height: 0;
+    border: 1px solid rgb(71, 168, 233);
+    animation: winningLineDiagonal 0.5s linear forwards;
+  }
+  .diagonal-left{
+    left: -20%;
+    transform: rotate(45deg);
+  }
+  .diagonal-right{
+    right: -20%;
+    transform: rotate(-225deg);
+  }
+}

@@ -28,7 +28,7 @@ const App = () => {
   useEffect(() => {
     if (winning) {
       thunks.addWinning(winning);
-      setTimeout(thunks.newGame, 2000);
+      setTimeout(thunks.newGame, 1000);
     }
   }, [winning]);
 
@@ -37,7 +37,7 @@ const App = () => {
       dispatch(actionCreators.setGameSession(true));
     }
     if (state.game.length >= 9) {
-      setTimeout(thunks.newGame, 300);
+      setTimeout(thunks.newGame, 1000);
     }
   }, [state.game]);
 
@@ -52,10 +52,6 @@ const App = () => {
     if (!gameSession && previousGameSession.current) thunks.newGame();
     previousGameSession.current = gameSession;
   }, [gameSession]);
-
-  useEffect(() => {
-    console.log(state);
-  });
 
   return (
     <div className={slyles.App}>

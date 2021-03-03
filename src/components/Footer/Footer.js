@@ -9,9 +9,13 @@ const Footer = () => {
           Your browser does not support SVG
         </object>
       </a>
-      <span className={`${slyles.description} unselectable`}>
-        Produced by Vladimir Leontiev as part of the training course "The Rolling Scopes"
-      </span>
+      <div className={`${slyles.description} unselectable`}>
+        <span>
+          Produced by Vladimir Leontiev as part of the training course "The Rolling Scopes"
+        </span>
+        <span>2021</span>
+      </div>
+
       <a  className={`${slyles.githubLogo} unselectable`} 
           href={'https://github.com/vladimirleontev281/react-game'} 
           rel="noreferrer" 

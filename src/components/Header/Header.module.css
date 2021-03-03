@@ -36,3 +36,21 @@
 .menuBlock>li:last-of-type{
   margin-right: 0;
 }
+
+@media(max-width: 768px) {
+  .Header{
+    padding: 0 25px;
+  }
+  .logoBlock{
+    font-size: 30px;
+  }
+  .logoBlock>span{
+    margin-right: 10px;
+  }
+  .menuBlock{
+    font-size: 14px;
+  }
+  .menuBlock>li{
+    margin-right: 15px;
+  }
+}
