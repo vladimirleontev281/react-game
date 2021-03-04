@@ -1,0 +1,80 @@
+.Footer{
+  width: 100%;
+  height: 80px;
+  padding: 0 50px;
+  background-color: black;
+  animation-delay: 1.2s;
+  --animate-duration: 0.3s;
+}
+.Footer>div{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  --animate-duration: 0.8s;
+  animation-delay: 2.4s;
+}
+.rsLogo{
+  min-width: 110px;
+  max-width: 110px;
+  height: 45px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  transform: rotate(-14deg);
+}
+.rsSVG{
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.description{
+  width: auto;
+  margin: 0 30px;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.description>span:first-of-type{
+  margin-bottom: 8px;
+}
+.description>span:last-of-type{
+  font-size: 80%;
+}
+.githubLogo{
+  min-width: 80px;
+  max-width: 80px;
+  background-color: transparent;
+}
+.githubImg{
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+@media(max-width: 768px) {
+  .Footer{
+    padding: 0 25px;
+  }
+  .rsLogo{
+    min-width: 70px;
+    max-width: 70px;
+    transform: rotate(-25deg);
+  }
+  .description{
+    font-size: 12px;
+    margin: 0 20px;
+  }
+  .githubLogo{
+    min-width: 60px;
+    max-width: 60px;
+  }
+}

@@ -1,0 +1,345 @@
+.GamePlace{
+  width: 100%;
+  min-height: calc(100vh - 180px);
+  padding: 50px 50px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.scoreBlock{
+  position: relative;
+  width: 40%;
+  height: auto;
+  padding-right: 50px;
+  --animate-duration: 0.5s;
+  animation-delay: 3s;
+}
+@keyframes scoreLine {
+  from {height: 0;}
+  to {height: 80%; border-color: white;}
+}
+.scoreBlock::after{
+  content: '';
+  width: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 1px solid transparent;
+  animation: scoreLine 0.3s linear 3.5s forwards;
+}
+
+.Score{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: white;
+}
+.Score>h3{
+  width: 100%;
+  margin: 0 0 20px 0;
+  text-align: center;
+  font-size: 45px;
+  text-decoration: underline;
+}
+.Score>div{
+  width: 100%;
+  height: auto;
+  font-size: 30px;
+}
+.Player{
+  position: relative;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+}
+.gameSession{
+  cursor: auto;
+}
+.Player:first-of-type{
+  margin-bottom: 20px;
+}
+.Player>span:first-of-type{
+  margin-right: 30px;
+  text-decoration: underline;
+}
+.playerMessage{
+  position: absolute;
+  right: 0;
+  top: 75%;
+  font-size: 60%;
+}
+.PlayerModal{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.PlayerModal>div{
+  width: 80%;
+}
+.playerNameModalDescrip{
+  display: block;
+  font-size: 10px;
+  font-style: italic;
+  color: white;
+}
+.playerNameModalInput{
+  width: 100%;
+  height: 30px;
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+.gameBlock{
+  width: 60%;
+  padding-left: 50px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.Game{
+  list-style-type: none;
+  position: relative;
+  width: 30vw;
+  height: 30vw;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.Cell{
+  padding: 10%;
+  /* border: 1px solid black; */
+  cursor: pointer;
+}
+.Cell.cross, .Cell.zero {
+  position: relative;
+  cursor: none;
+  pointer-events: none;
+}
+.cross::before, .cross::after, .zero::before{
+  content: "";
+  display: block;
+  border: 1px solid white;
+  position: absolute;
+}
+.cross::before, .cross::after{
+  width: 80%;
+  height: 0;
+  top:50%;
+  left: 10%;
+}
+
+.cross::before{
+  transform: rotate(45deg);
+}
+.cross::after{
+  transform: rotate(-45deg);
+}
+.zero::before{
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+  border-radius: 50%;
+  border-width: 2px;
+}
+.Cell.blocked{
+  cursor: none;
+  pointer-events: none;
+}
+
+.verticalLeft, .verticalRight, .horizontTop, .horizontBottom{
+  position: absolute;
+  border: 1px solid white;
+}
+@keyframes horizontLine {
+  from {width: 0;}
+  to {width: calc(100% + 40px);}
+}
+@keyframes verticalLine {
+  from {height: 0;}
+  to {height: calc(100% + 40px);}
+}
+
+.verticalLeft, .verticalRight{
+  width: 0;
+  /* height: calc(100% + 40px); */
+  top: -20px;
+}
+.horizontTop, .horizontBottom{
+  /* width: calc(100% + 40px); */
+  height: 0;
+  left: -20px;
+}
+.verticalLeft{
+  left: calc(33.33% - 1px);
+  animation: verticalLine 0.3s linear forwards;
+}
+.verticalRight{
+  right: calc(33.33% - 1px);
+  animation: verticalLine 0.3s linear 0.3s forwards;
+}
+.horizontTop{
+  top: calc(33.33% - 1px);
+  animation: horizontLine 0.3s linear 0.6s forwards;
+}
+.horizontBottom{
+  bottom: calc(33.33% - 1px);
+  animation: horizontLine 0.3s linear 0.9s forwards;
+}
+.winningLine{
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+@keyframes winningLineHorizontal {
+  from {width: 0;}
+  to {width: 100%;}
+}
+@keyframes winningLineVertical {
+  from {height: 0;}
+  to {height: 100%;}
+}
+@keyframes winningLineDiagonal {
+  from {width: 0;}
+  to {width: 100%;}
+}
+
+
+.horizontal-1, .horizontal-2, .horizontal-3 {
+  left: 0;
+  border: 1px solid rgb(71, 168, 233);
+  animation: winningLineHorizontal 0.5s linear forwards;
+}
+.vertical-1, .vertical-2, .vertical-3{
+  top: 0;
+  border: 1px solid rgb(71, 168, 233);
+  animation: winningLineVertical 0.5s linear forwards;
+}
+.diagonal-left, .diagonal-right{
+  width: 140%;
+  height: 2px;
+  top: 50%;
+}
+.diagonal-left::before, .diagonal-right::after{
+  content: "";
+  display: block;
+  height: 0;
+  border: 1px solid rgb(71, 168, 233);
+  animation: winningLineDiagonal 0.5s linear forwards;
+}
+.horizontal-1{
+  top: 16.5%
+}
+.horizontal-2{
+  top: 49.8%;
+}
+.horizontal-3{
+  top: 83.1%;
+}
+.vertical-1{
+  left: 16.5%;
+}
+.vertical-2{
+  left: 49.8%;
+}
+.vertical-3{
+  left: 83.1%;
+}
+.diagonal-left{
+  left: -20%;
+  transform: rotate(45deg);
+}
+.diagonal-right{
+  right: -20%;
+  transform: rotate(-225deg);
+}
+
+@media(max-width: 768px) {
+  .GamePlace{
+    padding: 30px 25px;
+  }
+  .scoreBlock{
+    padding-right: 25px;
+  }
+  .Score>h3{
+    font-size: 35px;
+  }
+  .Score>div{
+    font-size: 22px;
+  }
+  .gameBlock{
+    padding-left: 25px;
+  }
+  .Game{
+    width: 42vw;
+    height: 42vw;
+  }
+
+  .cross::before, .cross::after{
+    width: 80%;
+    height: 0;
+    top:50%;
+    left: 10%;
+  }
+  .cross::before{
+    transform: rotate(45deg);
+  }
+  .cross::after{
+    transform: rotate(-45deg);
+  }
+  .zero::before{
+    width: 60%;
+    height: 60%;
+    top: 20%;
+    left: 20%;
+    border-radius: 50%;
+    border-width: 2px;
+  }
+  .winningLine{
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+  @keyframes winningLineDiagonal {
+    from {width: 0;}
+    to {width: 100%;}
+  }
+  .diagonal-left, .diagonal-right{
+    width: 140%;
+    height: 2px;
+    top: 50%;
+  }
+  .diagonal-left::before, .diagonal-right::after{
+    content: "";
+    display: block;
+    height: 0;
+    border: 1px solid rgb(71, 168, 233);
+    animation: winningLineDiagonal 0.5s linear forwards;
+  }
+  .diagonal-left{
+    left: -20%;
+    transform: rotate(45deg);
+  }
+  .diagonal-right{
+    right: -20%;
+    transform: rotate(-225deg);
+  }
+}

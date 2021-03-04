@@ -1,0 +1,9 @@
+.App{
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgb(117, 225, 135);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
